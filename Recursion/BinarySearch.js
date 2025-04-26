@@ -1,3 +1,4 @@
+// O(log n) time | O(log n) space because of recursive callstacks 
 function binarySearch(array, target, left, right) {
 
     if (left > right) return -1;
