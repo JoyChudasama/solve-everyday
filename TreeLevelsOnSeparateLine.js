@@ -6,6 +6,8 @@ class TreeNode {
     }
 }
 
+// O(n) time where n is the number of nodes in tree
+// O(n) space where n is the number of recursive calls on callstack
 function printLevelsOnNewLine(root) {
     const dict = {};
     helper(root, 1, dict);
