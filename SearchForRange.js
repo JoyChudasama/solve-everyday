@@ -56,4 +56,42 @@ function getGivenSideOfRangeIndex(side, array, target, currPointer) {
 }
 
 
-console.log(searchForRange([0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73], 45));
+// O(log n) time where n is the length of array
+// O(1) space
+function searchForRange2(array, target) {
+    const range = [];
+    range[0] = searchForRange2Helper(array, target, 0, array.length - 1, LEFT_SIDE);
+    range[1] = searchForRange2Helper(array, target, 0, array.length - 1, RIGHT_SIDE);
+    return range;
+}
+
+function searchForRange2Helper(array, target, left, right, direction) {
+
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+
+        if (array[mid] > target) {
+            right = mid - 1;
+        } else if (array[mid] < target) {
+            left = mid + 1;
+        } else {
+            if (direction === LEFT_SIDE) {
+                if (mid === 0 || array[mid - 1] !== target) {
+                    return mid;
+                } else {
+                    right = mid - 1;
+                }
+            } else {
+                if (mid === array.length - 1 || array[mid + 1] !== target) {
+                    return mid;
+                } else {
+                    left = mid + 1;
+                }
+            }
+        }
+    }
+
+    return -1;
+}
+
+console.log(searchForRange2([0, 1, 21, 33, 45, 45, 45, 45, 45, 45, 61, 71, 73], 45));
