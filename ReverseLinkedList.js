@@ -5,6 +5,8 @@ class LinkedListNode {
     }
 }
 
+// O(n) time where n is the number of nodes
+// O(1) space 
 function reverseLinkedList(head) {
     let previousNode = null
     let currentNode = head
@@ -20,6 +22,19 @@ function reverseLinkedList(head) {
     return previousNode
 }
 
+// O(n) time where n is the number of nodes
+// O(n) space where n is the number of function calls 
+function reverseLinkedListRecursively(curr, prev = null) {
+    if (curr === null) return prev;
+
+    const next = curr.next;
+
+    curr.next = prev;
+    prev = curr;
+
+    return reverseLinkedListRecursively(next, prev);
+}
+
 const node5 = new LinkedListNode(5);
 const node4 = new LinkedListNode(4);
 const node3 = new LinkedListNode(3);
@@ -32,5 +47,4 @@ node3.next = node4;
 node4.next = node5;
 
 
-console.log(node1);
-console.log(reverseLinkedList(node1));
+console.log(reverseLinkedListRecursively(node1));
