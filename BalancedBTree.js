@@ -33,3 +33,25 @@ function getHeight(curr) {
 
     return (1 + Math.max(this.getHeight(curr.left), this.getHeight(curr.right)));
 }
+
+
+// Bottom Up
+// O(n) time where n is the number of nodes
+// O(h) space where h is the max height of nodes
+function isBalancedOptimal(root) {
+    return this.helper(root) !== -1;
+}
+
+function  helperOptimal(curr) {
+    if (curr === null) return 0;
+
+    const leftHeight = this.helper(curr.left);
+    if(leftHeight === -1) return -1;
+
+    const rightHeight = this.helper(curr.right);
+    if(rightHeight === -1) return -1;
+
+    if (Math.abs(leftHeight - rightHeight) > 1) return -1;
+
+    return Math.max(leftHeight, rightHeight) + 1;
+}
