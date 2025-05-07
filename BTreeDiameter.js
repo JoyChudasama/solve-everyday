@@ -12,7 +12,8 @@
 // Input: root = [1,2,3]
 // Output: 2
 
-
+// O(n) time where n is the number of nodes in the given tree
+// O(n) space where n is the number of function calls on a stack
 function diameterOfBinaryTree(root) {
     let res = Number.NEGATIVE_INFINITY;
 
