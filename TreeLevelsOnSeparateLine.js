@@ -1,3 +1,7 @@
+// Binary Tree Level Order Traversal
+
+// Given a binary tree root, return the level order traversal of it as a nested list, where each sublist contains the values of nodes at a particular level in the tree, from left to right.
+
 class TreeNode {
     constructor(value) {
         this.value = value;
@@ -11,12 +15,8 @@ class TreeNode {
 function printLevelsOnNewLine(root) {
     const dict = {};
     helper(root, 1, dict);
-
-    for (const key in dict) {
-        console.log(dict[key])
-    }
-
-    return dict;
+    console.log(Object.values(dict))
+    return '';
 }
 
 function helper(node, level, dict) {
@@ -29,6 +29,22 @@ function helper(node, level, dict) {
     dict[level].push(node.value);
     helper(node.left, level + 1, dict);
     helper(node.right, level + 1, dict);
+}
+
+
+function printLevelsOnNewLine2(root) {
+    const levels = [];
+
+    const dfs = (node, level) => {
+        if (node === null) return;
+        if (level - 1 === levels.length) levels.push([]);
+        levels[level - 1].push(node.val);
+        dfs(node.left, level + 1);
+        dfs(node.right, level + 1);
+    }
+
+    dfs(root, 1);
+    return levels;
 }
 
 const root = new TreeNode(1);
