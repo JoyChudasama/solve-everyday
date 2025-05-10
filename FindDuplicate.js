@@ -12,7 +12,7 @@
 // Input: nums = [1,2,3,4,4]
 // Output: 4
 
-
+// Floyd's Algo
 // O(n) time where n is the length of array
 // O(1) space
 function findDuplicate(array) {
