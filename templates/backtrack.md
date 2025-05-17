@@ -22,7 +22,7 @@ function backtrack(path, choices) {
         return;
     }
     
-    if (invalid(choice)) continue;
+    if (invalid(choice)) return;
 
     // make a choice
     path.push(choice);
