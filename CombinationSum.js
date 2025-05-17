@@ -22,23 +22,44 @@
 // target = 5
 // Output: []
 
+
+// FILLING THE TEMPLATE
+// 1. Choice
+// - add a currnet num with nums[i] or skip the num using nums[i+1]
+
+// 2. Constraint?
+// - currSum >= target or i is out of bound 
+
+// 3. Goal
+// - currSum === target
+
+// 4. Backtrack
+// - pop the latest choice
+
+
 // O(2*(t/m)) time where t is the target and m is the minimum value in nums
 // O(t/m) space where t is the target and m is the minimum value in nums
 function combinationSum(nums, target) {
     const res = [];
 
     const dfs = (i, combination, sum) => {
+        // Goal
         if (sum === target) {
             res.push([...combination]);
             return;
         }
 
+        // Constraint
         if (i >= nums.length || sum > target) return;
 
+        // Chooosing current num
         combination.push(nums[i]);
         dfs(i, combination, sum + nums[i]);
 
+        // Backtracking
         combination.pop();
+        
+        //Exploring next num 
         dfs(i+1, combination, sum);
     }
 
@@ -47,3 +68,5 @@ function combinationSum(nums, target) {
 }
 
 console.log(combinationSum([2, 5, 6, 9], 9))
+
+
