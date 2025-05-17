@@ -52,7 +52,7 @@ function combinationSum(nums, target) {
         // Constraint
         if (i >= nums.length || sum > target) return;
 
-        // Chooosing current num
+        // Chooosing current num / exploring it self again and again until basecase hits e.g. 2+2+2 because duplicates are allowed
         combination.push(nums[i]);
         dfs(i, combination, sum + nums[i]);
 
@@ -60,7 +60,7 @@ function combinationSum(nums, target) {
         combination.pop();
         
         //Exploring next num 
-        dfs(i+1, combination, sum);
+        dfs(i+1, combination, sum);KK
     }
 
     dfs(0, [], 0);

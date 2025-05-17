@@ -20,9 +20,25 @@
 //   [3,4]
 // ]
 
+// FILLING THE TEMPLATE
+// 1. Choice
+// - add a currnet num with nums[i] or skip the num using nums[i+1]
 
+// 2. Constraint?
+// - currSum >= target or i is out of bound or the ans is already been used
+// - duplicates are not allowed in a combination unless a num is appeared multiple times in the input array
+
+// 3. Goal
+// - currSum === target
+
+// 4. Backtrack
+// - pop the latest choice
+
+// Trick: sort array so all the duplicates are adjacent and index can be moved ahead until next num is not a duplicate after explored a current num
 function combinationSum2(nums, target) {
     const res = [];
+
+    // The trick pt.1
     nums.sort((a, b) => a - b);
 
     const dfs = (i, combination, sum) => {
@@ -37,6 +53,7 @@ function combinationSum2(nums, target) {
         dfs(i + 1, combination, sum + nums[i]);
 
         combination.pop();
+        // The trick pt.2
         while (i + 1 < nums.length && nums[i] === nums[i + 1]) {
             i++;
         }
