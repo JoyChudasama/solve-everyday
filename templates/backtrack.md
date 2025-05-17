@@ -21,19 +21,18 @@ function backtrack(path, choices) {
         result.push([...path]);
         return;
     }
+    
+    if (invalid(choice)) continue;
 
-    for (let choice of choices) {
-        if (invalid(choice)) continue;
+    // make a choice
+    path.push(choice);
 
-        // make a choice
-        path.push(choice);
+    // explore
+    backtrack(path, updatedChoices);
 
-        // explore
-        backtrack(path, updatedChoices);
-
-        // undo the choice (backtrack)
-        path.pop();
-    }
+    // undo the choice (backtrack)
+    path.pop();
+  
 }
 ```
 
