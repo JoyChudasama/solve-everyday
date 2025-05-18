@@ -1,27 +1,32 @@
 ### 1. Choice
+
 What options are available at this step?
 → Example: choosing a number, a direction, or a letter.
 
 ### 2. Constraint
+
 What makes a choice valid or invalid?
 → Example: “no repeats,” “adjacent cells only,” or “must be increasing.”
 
 ### 3. Goal (Base Case)
+
 When is the solution complete?
 → Example: built a path, filled the array, found a target.
 
 ### 4. Backtrack Step
+
 Undo the current choice before the next iteration.
 → Restore the state to try a different path.
 
 ### A General Template
+
 ```
 function backtrack(path, choices) {
     if (goal achieved) {
         result.push([...path]);
         return;
     }
-    
+
     if (invalid(choice)) return;
 
     // make a choice
@@ -32,7 +37,7 @@ function backtrack(path, choices) {
 
     // undo the choice (backtrack)
     path.pop();
-  
+
 }
 ```
 
@@ -47,3 +52,7 @@ Ask yourself:
 | What **constraints** must I check?           | Skip invalid choices                   |
 | When is a solution **complete**?             | Base case                              |
 | How do I **undo** a move?                    | Backtrack step (`pop`, `unmark`, etc.) |
+
+### Things to keep in mind
+
+- Backtracking is not solely recursion. Think about ususals to reach he results. e.g loops, conditions, etc. Instead of just following 4 basic steps which are push -> dfs -> pop -> dfs
