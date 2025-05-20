@@ -8,7 +8,7 @@
 
 // Example 1:
 // Input: n = 4
-// Output: [[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+// Output: [[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]] //Making strings a matrix helps to visualize why this is the output
 // Explanation: There are two different solutions to the 4-queens puzzle.
 
 // Example 2:
