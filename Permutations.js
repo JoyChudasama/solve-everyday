@@ -28,7 +28,6 @@
 function permutations(nums) {
 
     const res = [];
-    const curr = [...nums];
 
     const backtrack = (i, nums) => {
         if (i === nums.length) {
@@ -43,7 +42,7 @@ function permutations(nums) {
         }
     }
 
-    backtrack(0, curr);
+    backtrack(0, nums);
     return res;
 }
 
