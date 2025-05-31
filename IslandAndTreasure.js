@@ -41,10 +41,50 @@
 // 1 <= m, n <= 100
 // grid[i][j] is one of {-1, 0, 2147483647}
 
+// Backtracking
+// O(row * col * 4^row*col) time
+// O(row*col) space
+function islandsAndTreasure(grid) {
+    let ROWS = grid.length;
+    let COLS = grid[0].length;
+    const INF = 2147483647;
+    let visit = Array.from({ length: ROWS }, () => Array(COLS).fill(false));
+
+    const dfs = (r, c) => {
+
+        if (r < 0 || c < 0 || r >= ROWS || c >= COLS || grid[r][c] === -1 || visit[r][c]) return INF;
+
+        if (grid[r][c] === 0) return 0;
+
+        visit[r][c] = true;
+        let res = Math.min(
+            dfs(r + 1, c),
+            dfs(r - 1, c),
+            dfs(r, c + 1),
+            dfs(r, c - 1)
+        );
+
+        visit[r][c] = false;
+        return res === INF ? INF : 1 + res;
+    };
+
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+            if (grid[r][c] === INF) {
+                grid[r][c] = dfs(r, c);
+            }
+        }
+    }
+
+    return grid;
+}
+
+
 // Notes:
 // We are using BFS from treasures to land instead of land to treasures
-// Backwards loop on the queue makes sure we only process nodes on that level of BFS and we updated dist+1 to go to next level of BFS 
+// Backwards loop on the queue makes sure we only process nodes on that level of BFS and we updated dist+1 to go to next level of BFS
 
+// BFS Optimal
 // O(row * col) time
 // O(row * col) space
 function islandsAndTreasure(grid) {
