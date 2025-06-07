@@ -7,8 +7,8 @@
 // If no such order exists, the function should return an empty array.
 
 // Sample Input:
-// jobs = [1, 2, 3, 4] |
-// deps = [[1, 21, [1, 3], [3, 2], [4, 2], [4, 31] |
+// jobs = [1, 2, 3, 4] 
+// deps = [[1, 21, [1, 3], [3, 2], [4, 2], [4, 31]]
 
 function topologicalSort(jobs, deps) {
     const adjList = new Map();
