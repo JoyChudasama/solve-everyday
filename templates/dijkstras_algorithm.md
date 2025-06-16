@@ -46,42 +46,9 @@ while there are unvisited vertices:
                 dist[target] = dist[source] + cost(source, target)   # Relaxation
 ```
 
-## Example
-Consider this directed graph:
-```
-    1 --2--> 2
-    1 --4--> 3
-    2 --4--> 3
-```
-
-### Step-by-step:
-1. Start from vertex 1: `dist[1] = 0`, all others = infinity.
-2. Visit vertex 1: update `dist[2] = 2`, `dist[3] = 4`
-3. Visit vertex 2 (smaller distance): update `dist[3] = min(4, 2+4) = 4`
-4. Visit vertex 3: no further updates
-
-**Final distances**:
-```
-dist[1] = 0
-dist[2] = 2
-dist[3] = 4
-```
-
 ## Time Complexity
 - Using adjacency matrix: **O(V^2)**
 - Using priority queue + adjacency list: **O((V + E) log V)** (better)
-
-## Limitations
-Dijkstra's algorithm fails in presence of **negative weight edges**. For example:
-
-```
-1 --3--> 2
-2 --(-10)--> 3
-1 --5--> 4
-4 --2--> 3
-```
-
-Dijkstra picks 2 first and assumes `dist[3] = 3 + (-10) = -7` is not possible, missing the shorter path via 4. Hence, **it may give incorrect results** with negative edges.
 
 ## Python Implementation
 ```python
