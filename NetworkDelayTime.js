@@ -26,17 +26,18 @@
 // O(E * V) time
 // O(E + V) space
 function networkDelayTime(times, n, k) {
-    if (times.length !== n) return -1;
 
     const adjList = new Map();
-    for (let i = 0; i < n; i++) adjList.set(i, []);
-    for (const [source, target, time] of times) adjList.get(source).push([target, time]);
+    for (const [source, target, time] of times) {
+        if (!adjList.has(source)) adjList.set(source, []);
+        adjList.get(source).push([target, time]);
+    };
 
-    const temp = Array(n + 1).fill(Number.POSITIVE_INFINITY);
+    const distances = Array(n + 1).fill(Number.POSITIVE_INFINITY);
     const dfs = (cur, cost) => {
-        if (cost >= temp[cur]) return;
+        if (cost >= distances[cur]) return;
 
-        temp[cur] = cost;
+        distances[cur] = cost;
         if (!adjList.get(cur)) return;
         for (const [node, time] of adjList.get(cur)) {
             dfs(node, cost + time);
@@ -44,8 +45,9 @@ function networkDelayTime(times, n, k) {
     }
 
     dfs(k, 0);
-    const res = Math.max(...temp.slice(1));
+    const res = Math.max(...distances.slice(1));
     return res === Number.POSITIVE_INFINITY ? -1 : res;
 }
 
 console.log(networkDelayTime([[1, 2, 1], [2, 3, 1], [1, 4, 4], [3, 4, 1]], 4, 1));
+console.log(networkDelayTime([[1, 2, 100], [1, 3, 1], [3, 2, 1]], 3, 1));
