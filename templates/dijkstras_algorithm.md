@@ -15,35 +15,35 @@ Dijkstra's algorithm is greedy because it always picks the vertex with the **cur
 - **Relaxation**: Updating the shortest path estimate to a vertex if a better path is found.
 
 ```
-if dist[u] + cost(u, v) < dist[v]:
-    dist[v] = dist[u] + cost(u, v)
+if dist[source] + cost(source, target) < dist[target]:
+    dist[target] = dist[source] + cost(source, target)
 ```
 
 ## Algorithm Steps
 
 ### Input
 - Graph G(V, E) with non-negative edge weights.
-- Source vertex `s`.
+- Source vertex `start`.
 
 ### Initialization
 ```python
-for each vertex v:
-    dist[v] = infinity
-    visited[v] = false
+for each vertex node:
+    dist[node] = infinity
+    visited[node] = false
 
-dist[s] = 0
+dist[start] = 0
 ```
 
 ### Main Loop
 ```python
 while there are unvisited vertices:
-    u = vertex with the smallest dist[u] that is not visited
-    visited[u] = true
+    source = vertex with the smallest dist[source] that is not visited
+    visited[source] = true
 
-    for each neighbor v of u:
-        if not visited[v]:
-            if dist[u] + cost(u, v) < dist[v]:
-                dist[v] = dist[u] + cost(u, v)   # Relaxation
+    for each neighbor target of source:
+        if not visited[target]:
+            if dist[source] + cost(source, target) < dist[target]:
+                dist[target] = dist[source] + cost(source, target)   # Relaxation
 ```
 
 ## Example
@@ -67,11 +67,9 @@ dist[2] = 2
 dist[3] = 4
 ```
 
-
 ## Time Complexity
 - Using adjacency matrix: **O(V^2)**
 - Using priority queue + adjacency list: **O((V + E) log V)** (better)
-
 
 ## Limitations
 Dijkstra's algorithm fails in presence of **negative weight edges**. For example:
@@ -85,31 +83,30 @@ Dijkstra's algorithm fails in presence of **negative weight edges**. For example
 
 Dijkstra picks 2 first and assumes `dist[3] = 3 + (-10) = -7` is not possible, missing the shorter path via 4. Hence, **it may give incorrect results** with negative edges.
 
-
 ## Python Implementation
 ```python
 def dijkstra(graph, start):
     import heapq
 
     # Step 1: Initialize all distances to infinity
-    dist = {v: float('inf') for v in graph}
+    dist = {node: float('inf') for node in graph}
     dist[start] = 0  # Distance to the source is 0
 
     # Step 2: Priority queue to process nodes in order of current shortest distance
-    pq = [(start, 0)]  # Tuple format: (node, distance)
+    pq = [(0, start)]  # Tuple format: (distance, node)
 
     while pq:
-        u, current_dist = heapq.heappop(pq)  # Pop the node with smallest distance
+        current_dist, source = heapq.heappop(pq)  # Pop the node with smallest distance
 
         # Skip if we've already found a better path
-        if current_dist > dist[u]:
+        if current_dist > dist[source]:
             continue
 
-        # Step 3: Check all neighbors of u
-        for v, weight in graph[u]:
-            if dist[u] + weight < dist[v]:  # Relaxation step
-                dist[v] = dist[u] + weight
-                heapq.heappush(pq, (v, dist[v]))  # Push updated distance to the queue
+        # Step 3: Check all neighbors of source
+        for target, cost in graph[source]:
+            if dist[source] + cost < dist[target]:  # Relaxation step
+                dist[target] = dist[source] + cost
+                heapq.heappush(pq, (dist[target], target))  # Push updated distance to the queue
 
     return dist
 
@@ -122,8 +119,6 @@ graph = {
 print(dijkstra(graph, 1))
 ```
 
-
 ## Conclusion
 - **Use Dijkstra** when all weights are **non-negative**.
 - **Don't use** it when graph contains **negative weights** — use **Bellman-Ford** instead.
-
