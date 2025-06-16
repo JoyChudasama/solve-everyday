@@ -1,4 +1,4 @@
-## [Bellman-Ford Algorithm](https://www.youtube.com/watch?v=FtN3BYH2Zes&t)
+# [Bellman-Ford Algorithm](https://www.youtube.com/watch?v=FtN3BYH2Zes&t)
 
 > "Try all possible paths and choose the best" — that’s dynamic programming in action!
 
